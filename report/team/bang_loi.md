@@ -29,7 +29,7 @@ Người gắn nhãn 1: ... · Người gắn nhãn 2: ... (gắn trong 8 phút,
 | 19 | Giới hạn hệ thống | Giới hạn hệ thống | 1 | Giới hạn hệ thống |
 | 20 | Ngầm | Hệ thống | 0 | Hệ thống |
 
-**Tỉ lệ đồng thuận:** 100% (20/20 ca).
+**Tỉ lệ đồng thuận:** 90% (18/20 ca).
 
 ## Quy tắc phân biệt cho các ca không trùng
 
