@@ -259,3 +259,17 @@ if __name__ == '__main__':
     pv_e = reqs[reqs['loai'].isin(['noi_dia', 'hang_nang'])]
     print(f"Trong phạm vi noi_dia + hang_nang: tỉ lệ lam_lai {(pv_e['ket_qua'] == 'lam_lai').mean():.1%}, "
           f"tỉ lệ được xem lại {pv_e['duoc_xem_lai'].mean():.1%}")
+
+    # ----- CP5 · E2 · Đối chiếu đúng phạm vi pilot và giới hạn 2 lượt -----
+    print('\n== E2 · noi_dia + hang_nang, tối đa 2 lượt chạy [simulated] ==')
+    kq_pilot = mo_hinh(runs, pv_e, max_lan_chay=2)
+    for ten, tham_so in [('Gốc', {}), ('Làm lại gấp đôi', {'he_so_lam_lai': 2}),
+                         ('Xem lại gấp đôi', {'he_so_xem_lai': 2})]:
+        kq_rui_ro = mo_hinh(runs, pv_e, max_lan_chay=2, **tham_so)
+        thay_doi = (kq_rui_ro['cps'] / kq_pilot['cps'] - 1) * 100
+        print(f"{ten}: {kq_rui_ro['tong']:,.2f} đ / {kq_rui_ro['thanh_cong']} việc "
+              f"= {kq_rui_ro['cps']:,.2f} đ/việc ({thay_doi:+.2f}%) [simulated]")
+    khong_tc_pilot = len(pv_e) - kq_pilot['thanh_cong']
+    he_thong_pilot = (kq_pilot['tong'] + khong_tc_pilot * BASELINE) / len(pv_e)
+    print(f'Cả hệ thống trong phạm vi pilot: {he_thong_pilot:,.2f} đ/yêu cầu '
+          f'(cộng {khong_tc_pilot} ca làm thay × 12.000 đ, chưa gồm cố định) [simulated]')
