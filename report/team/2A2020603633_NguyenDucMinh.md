@@ -6,9 +6,9 @@ Ví dụ: `20241234_NguyenVanAn.md`.
 
 ## 1. Thông tin thành viên
 
-- Họ tên: [đã ẩn]
-- MSSV: [đã ẩn]
-- Email: [đã ẩn]
+- Họ tên: Nguyễn Đức Minh
+- MSSV: 2A202603633
+- Email: Jiji.Minh@gmail.com
 - Vai trong nhóm (người viết code, người kiểm số, người gắn nhãn 1, người gắn nhãn 2 kiêm giữ hồ sơ): người gắn nhãn 1
 
 ## 2. Phần việc phụ trách
