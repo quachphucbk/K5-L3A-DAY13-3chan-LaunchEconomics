@@ -13,7 +13,10 @@ Ví dụ: `20241234_NguyenVanAn.md`.
 
 ## 2. Phần việc phụ trách
 
-...
+- gán 20 nhãn cho 20 ca lỗi
+- so sánh nhãn với người 1, đạt đồng thuận 90% (18/20 ca)
+- đã đề xuất khắc phục 2/5 lỗi
+- đã hoàn thành hồ sơ launch
 
 ## 3. Đóng góp cụ thể
 
@@ -29,7 +32,7 @@ Commit, file, bảng hoặc con số do bạn làm.
 
 Công cụ nào, dùng vào việc gì, bạn tự kiểm tra kết quả ra sao.
 
-...
+- chat gpt 6 luna
 
 ## 6. Tự đánh giá
 
