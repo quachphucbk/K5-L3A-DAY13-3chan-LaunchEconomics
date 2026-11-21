@@ -13,7 +13,7 @@
 | --: | ------ | ---- | ----- | ------ | ------- |
 |   1 |        |      |       |        |         |
 |   2 |        |      |       |        |         |
-|   3 |        |      |       |        |         |
+|   3 | Nguyễn Đức Minh       | 2A202603633     | Jiji.Minh@gmail.com      | https://github.com/MinhDucDepZaiJ       | Người gắn nhãn 1        |
 |   4 |        |      |       |        |         |
 
 Bốn vai của lab:
