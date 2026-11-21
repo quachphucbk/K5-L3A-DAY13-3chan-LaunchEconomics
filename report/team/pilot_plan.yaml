@@ -7,6 +7,13 @@
 #      5.980 yêu cầu thực mỗi nhánh và DE 6,96.
 # Đánh đổi: Nếu tác động thật là 5 điểm phần trăm, power khoảng 64,18%.
 # Nguồn: src/lab13.py và report/team/CP4_D1_2A202603633.txt.
+#
+# D2 · Năm câu kiểm tra tách được tác động, theo phương án đã ghi trong kế hoạch:
+# D2.1. Đối chứng cùng thời gian: Có theo thiết kế; hai nhánh xử lý cùng loại yêu cầu tại các depot có cả hai nhánh, trong cùng giai đoạn đo chính từ tuần 3.
+# D2.2. Ngẫu nhiên hay người chọn: Theo kế hoạch, chia ngẫu nhiên 40 nhân viên thành 20/20, cân bằng theo depot với seed 13 và giữ nguyên nhánh suốt pilot.
+# D2.3. Ảnh hưởng gián tiếp: Có nguy cơ chia sẻ gợi ý; giảm bằng cấp quyền theo tài khoản, không chia sẻ giữa nhánh và kiểm tra log sử dụng.
+# D2.4. Viết trước: Kế hoạch quy định chốt chỉ số, MDE, cỡ mẫu, ngưỡng dừng và lịch trước khi bắt đầu; ngày quyết định 2027-01-05 hiện là dự kiến, cần nhóm xác nhận.
+# D2.5. Ít nhất 20 cụm mỗi nhánh: Có theo thiết kế; mỗi nhánh 20 cụm nhân viên, mỗi người tối thiểu 299 yêu cầu; MDE 6 điểm, power khoảng 64,18% nếu tác động thật chỉ 5 điểm.
 
 pilot:
   owner: "Giám đốc vận hành LogiX-VN"
