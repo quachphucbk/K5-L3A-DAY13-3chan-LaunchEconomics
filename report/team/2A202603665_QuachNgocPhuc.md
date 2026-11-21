@@ -1,6 +1,6 @@
 # Báo cáo cá nhân — Quách Ngọc Phúc — 2A202603665
 
-**Trạng thái: bản tạm.** Đã xong CP1–CP2 (code), bảng khắc phục CP3 và sửa CP4; CP5 đang chờ nhóm phân việc.
+**Trạng thái: hoàn thành.** Đã xong CP1–CP2 (code), bảng khắc phục CP3, sửa CP4, `chi_so.md` và sửa hồ sơ CP5, tham gia duyệt chéo.
 
 ## 1. Thông tin thành viên
 
@@ -17,7 +17,7 @@
 | CP2 — Độ nhạy | Viết B1–B4 trong `src/lab13.py`; điền B1–B4 trong `bang_chi_phi.md` | Xong |
 | CP3 — Bảng lỗi | Không gắn nhãn (hai bộ nhãn độc lập do Minh và Toản gắn); điền tên người gắn nhãn và viết lại bảng khắc phục 5 ca | Xong |
 | CP4 — Pilot plan | Rà `pilot_plan.yaml` theo checklist; bổ sung D1, D2, đánh đổi, ngưỡng an toàn, sửa vế KHÔNG THÌ và scope | Xong |
-| CP5 — Hồ sơ, duyệt chéo | Chờ nhóm phân việc | Chưa |
+| CP5 — Chỉ số, hồ sơ, duyệt chéo | Thêm code E1 trong `src/lab13.py`; điền `chi_so.md`; sửa `ho_so_launch_v0.md` (người phụ trách, trạng thái, nhãn simulated); tham gia duyệt chéo cùng nhóm | Xong |
 
 ## 3. Đóng góp cụ thể
 
@@ -27,12 +27,16 @@
 - **B1–B4:** 9 kịch bản độ nhạy, xếp hạng làm lại > xem lại > lương; B3 giới hạn 2 lần rẻ nhất cho cả hệ thống (6.901.220 đ [simulated]); B4 xem lại 100% là 11.743 đ = 0,98× (12.415 đ = 1,03× với 15,3 phút làm lại) [simulated].
 - **CP3:** viết lại 5 dòng khắc phục (ca 1, 2, 3, 13, 5) để mỗi dòng có event, ngưỡng, tần suất và người phụ trách là vai trò trong LogiX.
 - **CP4:** bổ sung kết luận cho D1 b–d, năm câu D2, đánh đổi (power 0,64 ở mức 5 điểm), ngưỡng an toàn dựa trên tỉ lệ mở lại 4,25% / 3,97%; sửa vế KHÔNG THÌ của 3 luật dừng thành việc bị cấm; thêm lý do bằng số cho `scope`.
+- **CP5 · E1:** code tính thử ba chỉ số trong đợt chạy thử: chính 82,83% (994/1.200), dùng 27,12% (48/177), an toàn 4,25% (51/1.200); đề xuất thêm 1 chỉ số dùng và 1 chỉ số an toàn (kiểm tra mẫu đơn hoàn sai tiền).
+- **CP5 · event, E2:** 11 event có `trace_id`, kiểm tra chéo từng chỉ số với event; 3 dòng rủi ro kinh tế lấy số từ B1, B4, A4 (+51,8%, 0,98×, +1.185 đ/việc [simulated]).
+- **CP5 · hồ sơ:** đổi người phụ trách sang vai trò trong LogiX, cập nhật trạng thái mục 4, thêm nhãn simulated cho số giả lập, thêm điều kiện giảm xem lại theo bậc.
 
 ## 4. Bằng chứng
 
 - CP1, CP2 (code): [commit d2a520d — CP1, CP2](https://github.com/quachphucbk/K5-L3A-DAY13-3chan-LaunchEconomics/commit/d2a520d219b0ff25a3a6c61834fea825659562c7) — `src/lab13.py`.
 - CP1, CP2 (bảng): [commit 466dc7d — CP1, CP2](https://github.com/quachphucbk/K5-L3A-DAY13-3chan-LaunchEconomics/commit/466dc7dde5e5811712cdc72cb6a74f26e95423e7) — `report/team/bang_chi_phi.md`.
 - CP3, CP4: [commit 62480b8 — edit cp4](https://github.com/quachphucbk/K5-L3A-DAY13-3chan-LaunchEconomics/commit/62480b821adf36a1131e07bbe9164d99e6371562) — `report/team/bang_loi.md`, `report/team/pilot_plan.yaml`.
+- CP5: [commit 08c428c — CP5](https://github.com/quachphucbk/K5-L3A-DAY13-3chan-LaunchEconomics/commit/08c428ce1df510c15a52332e223cf7595543dbf9) — `report/team/chi_so.md`, `report/team/ho_so_launch_v0.md`, E1 trong `src/lab13.py`.
 - Cách chạy lại: `cd src && python lab13.py`.
 
 ## 5. Công cụ AI đã dùng
@@ -42,16 +46,16 @@
   - Đọc toàn bộ tài liệu của lab và lên kế hoạch theo từng checkpoint.
   - Viết code A1–A4, B1–B4 trong `src/lab13.py` và điền số vào `bang_chi_phi.md`.
   - Rà CP3, CP4 theo checklist; đề xuất bảng khắc phục 5 ca và các chỗ sửa trong `pilot_plan.yaml`, tôi duyệt rồi mới điền.
+  - CP5: viết code E1, điền `chi_so.md`, đề xuất và sửa các lỗi trong `ho_so_launch_v0.md`; giải thích cách duyệt chéo.
 - **Không dùng AI để:** gắn nhãn 20 ca lỗi (RULES.md cấm; nhãn do Minh và Toản gắn độc lập) và tạo kết quả duyệt chéo.
 - **Cách tự kiểm tra:**
   - Chạy `python lab13.py`, xác nhận ba phép thử A1 in ĐẠT.
   - Đối chiếu mọi số A2–B4 với số tham khảo trong `docs/Lab13_Huong_dan_chi_tiet_buoi_chieu.md` (lệch dưới 2%; B4 12.415 so với 12.414 do làm tròn).
   - Kiểm tra B1: mỗi kịch bản "giảm một nửa" bằng nửa mức tăng của "gấp đôi".
+  - E1: ba chỉ số khớp số tham khảo (82,83% · 27,12% · 4,25%).
   - CP4: `yaml.safe_load` đọc được, không còn dấu `?` ngoài chú thích, lệnh `grep` tìm từ bị cấm theo quy tắc 5 không in gì.
 
 ## 6. Tự đánh giá
-
-<!-- Bản nháp, tự viết lại bằng lời của mình trước khi nộp. -->
 
 - Làm tốt: CP1–CP2 chạy đúng và khớp đáp án; hiểu vì sao tử số tính mọi lần chạy còn mẫu số chỉ đếm việc thành công, và vì sao giới hạn chạy lại rẻ nhất cho công ty (2 lần) khác giới hạn cho chi phí mỗi việc thành công thấp nhất (1 lần).
 - Cần cải thiện: phụ thuộc nhiều vào AI khi viết code; cần tự tính tay ít nhất một con số (ví dụ 4.373.585 ÷ 978 = 4.472) để chắc chắn tự giải thích được trước hội đồng.

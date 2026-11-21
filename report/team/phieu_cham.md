@@ -14,10 +14,10 @@ Nhóm số n chấm nhóm số n + 1; nhóm cuối chấm nhóm 1. Chấm theo b
 | Pilot ra được quyết định | Không đối chứng hoặc thiếu cỡ mẫu | Đủ cỡ mẫu, luật dừng chung chung | Tách được tác động, đủ mẫu, luật dừng có ngưỡng, thời hạn, người có quyền dừng | 10 | Kế hoạch Pilot gồm hai nhóm, mỗi nhóm 20 nhân viên, với mục tiêu phát hiện mức chênh lệch 6 điểm phần trăm. Nhóm đã đề xuất theo dõi tỷ lệ mở lại, với ngưỡng chênh lệch tối đa 2 điểm phần trăm so với nhóm đối chứng và tỷ lệ mở lại không vượt quá 6%. |
 | **Tổng** | | | | **30/ 30** | |
 
-**Quyết định của hội đồng:** Go · Go có điều kiện · No-go (giữ một)
+**Quyết định của hội đồng:** Go có điều kiện
 
 **Lý do:**
 Chi phí xử lý bằng Agent trung bình là 5.865 đồng/yêu cầu, thấp hơn mức 12.000 đồng khi xử lý thủ công. Tuy nhiên, khi số ca làm lại tăng gấp đôi, chi phí tăng 51,8%. Vì vậy, nhóm cần triển khai Pilot có kiểm soát, theo dõi các chỉ số an toàn và hoàn thiện biện pháp xử lý rủi ro trước khi mở rộng.
-**Một câu hỏi cho đội trình:** ...Nếu tỷ lệ yêu cầu bị mở lại tăng cao hoặc Agent thực hiện hoàn tiền trùng lặp trong quá trình Pilot, nhóm sẽ xử lý như thế nào?
+**Một câu hỏi cho đội trình:** Nếu tỷ lệ yêu cầu bị mở lại tăng cao hoặc Agent thực hiện hoàn tiền trùng lặp trong quá trình Pilot, nhóm sẽ xử lý như thế nào?
 
-**Câu trả lời của đội trình (ghi lại tại buổi):** ...Nếu tỷ lệ yêu cầu bị mở lại vượt 6% hoặc cao hơn nhóm đối chứng trên 2 điểm phần trăm, nhóm sẽ tạm dừng Pilot để kiểm tra nguyên nhân. Trường hợp phát hiện hoàn tiền trùng lặp, hệ thống sẽ ngừng chức năng hoàn tiền tự động ngay lập tức, chuyển các yêu cầu sang nhân viên xử lý và đối soát giao dịch. Nhóm chỉ tiếp tục thử nghiệm sau khi khắc phục lỗi, kiểm thử lại và được người phụ trách phê duyệt.
+**Câu trả lời của đội trình (ghi lại tại buổi):** Nếu tỷ lệ yêu cầu bị mở lại vượt 6% hoặc cao hơn nhóm đối chứng trên 2 điểm phần trăm, nhóm sẽ tạm dừng Pilot để kiểm tra nguyên nhân. Trường hợp phát hiện hoàn tiền trùng lặp, hệ thống sẽ ngừng chức năng hoàn tiền tự động ngay lập tức, chuyển các yêu cầu sang nhân viên xử lý và đối soát giao dịch. Nhóm chỉ tiếp tục thử nghiệm sau khi khắc phục lỗi, kiểm thử lại và được người phụ trách phê duyệt.
