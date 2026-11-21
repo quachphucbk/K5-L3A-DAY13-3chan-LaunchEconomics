@@ -15,7 +15,7 @@ BASELINE = 12000    # đồng cho 1 yêu cầu khi nhân viên tự làm (6 phú
 
 
 # ---------- Nhiệm vụ A1 · Kinh tế của việc chạy lại ----------
-# TODO CP1: viết ba hàm dưới đây cho tới khi kiem_tra_dap_an_biet_truoc() in ĐẠT.
+# CP1: ba hàm dưới đây được kiểm tra bằng kiem_tra_dap_an_biet_truoc().
 def so_lan_chay_ky_vong(p, k=None):
     """Số lần chạy trung bình cho 1 yêu cầu khi mỗi lần đúng với xác suất p.
     k = số lần chạy tối đa; k=None nghĩa là chạy lại đến khi đúng."""
@@ -47,7 +47,7 @@ def kiem_tra_dap_an_biet_truoc():
 
 
 # ---------- Nhiệm vụ A2 · Mô hình chi phí từ trace ----------
-# TODO CP1: viết mo_hinh; CP2 gọi lại hàm này với tham số giá và hệ số đã đổi.
+# CP1: mô hình chi phí; CP2 gọi lại hàm này với tham số giá và hệ số đã đổi.
 def mo_hinh(runs, reqs, gia_vao=26, gia_ra=130, gia_tool=15, luong_phut=2000,
             he_so_xem_lai=1.0, he_so_lam_lai=1.0, max_lan_chay=None):
     """Trả về dict gồm: token, tool, xem_lai, lam_lai, tong, thanh_cong, cps (chi phí mỗi việc thành công).
@@ -101,7 +101,7 @@ if __name__ == '__main__':
                 cps=SIM, hoa_don_moi_yc='đo từ trace')
     print('\n== A2 · Mô hình chi phí từ trace ==')
     for ten, gia_tri in ket_qua.items():
-        dinh_dang = f'{gia_tri:>14,.1f}' if ten == 'hoa_don_moi_yc' else f'{gia_tri:>14,.0f}'
+        dinh_dang = f'{gia_tri:>14,.0f}' if ten == 'thanh_cong' else f'{gia_tri:>14,.2f}'
         print(f'{ten:15s} {dinh_dang}  {nhan[ten]}')
     print(f"Số phút xem lại {reqs['phut_xem_lai_simulated'].sum():,} · làm lại "
           f"{reqs['phut_lam_lai_simulated'].sum():,} {SIM}; số lần gọi tool {runs['tool_calls'].sum():,}")
@@ -125,7 +125,7 @@ if __name__ == '__main__':
         print(f"{loai:10s} {len(r):6d} {kq['thanh_cong'] / len(r) * 100:8.1f}% {so_lan:7.2f} "
               f"{kq['cps']:10,.0f} {kq['cps'] / BASELINE:6.2f}×")
     # Chạy lại có giúp không: tỉ lệ ok theo từng lần thử
-    ok_theo_lan = (runs.merge(reqs[['request_id', 'loai']], on='request_id')
+    ok_theo_lan = (runs.merge(reqs[['request_id', 'loai']], on='request_id', validate='many_to_one')
                    .assign(ok=lambda d: (d['status'] == 'ok').astype(float))
                    .pivot_table(index='loai', columns='attempt', values='ok', aggfunc='mean'))
     print('Tỉ lệ ok theo lần thử (đo từ trace):')
@@ -143,8 +143,8 @@ if __name__ == '__main__':
         tc_thang = YC_THANG * he_so_kl * kq_pv['thanh_cong'] / len(reqs)
         co_dinh_viec = CO_DINH / tc_thang
         tong_viec = kq_pv['cps'] + co_dinh_viec
-        print(f'{ten_kl:22s} {tc_thang:9,.0f} việc/tháng · cố định {co_dinh_viec:6,.0f} đ/việc · '
-              f'cps + cố định {tong_viec:6,.0f} đ = {tong_viec / BASELINE:.2f}× {SIM}')
+        print(f'{ten_kl:22s} {tc_thang:9,.0f} việc/tháng · cố định {co_dinh_viec:9,.2f} đ/việc · '
+              f'cps + cố định {tong_viec:9,.2f} đ = {tong_viec / BASELINE:.2f}× {SIM}')
     # ----- B1 · Đổi từng yếu tố -----
     print('\n== B1 · Đổi từng yếu tố (cps [simulated]) ==')
     goc = ket_qua['cps']

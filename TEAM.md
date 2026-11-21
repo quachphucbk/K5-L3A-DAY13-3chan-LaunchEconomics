@@ -12,7 +12,7 @@
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
 |   1 | Quách Ngọc Phúc       | 2A202603665     | quachphucbk@gmail.com      | https://github.com/quachphucbk       | Người viết code        |
-|   2 |        |      |       |        |         |
+|   2 | Ngô Văn Tuân       | 2A202603630     | 26ai.tuannv3@vinuni.edu.vn      | https://github.com/ngotuna23a       | Người kiểm số        |
 |   3 | Nguyễn Đức Minh       | 2A202603633     | Jiji.Minh@gmail.com      | https://github.com/MinhDucDepZaiJ       | Người gắn nhãn 1        |
 |   4 |        |      |       |        |         |
 

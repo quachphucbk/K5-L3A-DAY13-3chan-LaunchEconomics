@@ -6,23 +6,23 @@ Số tính bằng `src/lab13.py`. Mọi con số tính từ cột `_simulated` g
 
 | Phép thử (p = 0,8) | Kết quả của nhóm |
 | --- | --- |
-| Số lần chạy trung bình, tối đa 2 lần | 1,20 · ĐẠT |
-| Số lần chạy trung bình, chạy đến khi đúng | 1,25 · ĐẠT |
-| Hệ số chi phí mỗi việc thành công, tối đa 3 lần | 1,25 · ĐẠT (= 1/p, k triệt tiêu) |
+| Số lần chạy trung bình, tối đa 2 lần | 1,20 lần |
+| Số lần chạy trung bình, chạy đến khi đúng | 1,25 lần |
+| Hệ số chi phí mỗi việc thành công, tối đa 3 lần | 1,25 lần giá một lần chạy |
 
 ## A2 · Mô hình chi phí từ trace
 
 | Khoản | Số tiền (đ) | Nguồn | Nhãn |
 | --- | ---: | --- | --- |
-| Token | 245.585 | `logix_runs.csv` (1.624 lần chạy, kể cả lần lỗi) | đo từ trace |
-| Tool | 84.000 | `logix_runs.csv` (5.600 lần gọi × 15 đ) | đo từ trace |
-| Trong đó, phần của lần chạy thứ 2 và 3 | 93.804 | attempt lớn hơn 1 | đo từ trace |
-| Xem lại | 1.780.000 | `phut_xem_lai_simulated` (890 phút × 2.000 đ) | simulated |
-| Làm lại | 2.264.000 | `phut_lam_lai_simulated` (1.132 phút × 2.000 đ) | simulated |
-| Tổng chi phí | 4.373.585 | | có phần simulated |
-| Số việc thành công | 978 | `ket_qua` == `thanh_cong` | |
-| Chi phí mỗi việc thành công | 4.472 | 4.373.585 ÷ 978 | simulated |
-| Hoá đơn token và tool chia cho số yêu cầu | 274,7 | (245.585 + 84.000) ÷ 1.200 | đo từ trace |
+| Token | 245.585,13 | `logix_runs.csv`, mọi lần chạy | đo từ trace |
+| Tool | 84.000,00 | 5.600 lần gọi × 15 đ | đo từ trace |
+| Trong đó, phần của lần chạy thứ 2 và 3 | 93.804,49 | attempt lớn hơn 1; đã nằm trong token + tool | đo từ trace |
+| Xem lại | 1.780.000,00 | `phut_xem_lai_simulated`: 890 phút × 2.000 đ | simulated |
+| Làm lại | 2.264.000,00 | `phut_lam_lai_simulated`: 1.132 phút × 2.000 đ | simulated |
+| Tổng chi phí | 4.373.585,13 | Token + tool + xem lại + làm lại | simulated |
+| Số việc thành công | 978 | `ket_qua == 'thanh_cong'` | đếm từ dữ liệu |
+| Chi phí mỗi việc thành công | 4.471,97 | Tổng chi phí ÷ 978 | simulated |
+| Hoá đơn token và tool chia cho số yêu cầu | 274,65 | (Token + tool) ÷ 1.200 | đo từ trace |
 
 - Chi phí mỗi việc thành công gấp bao nhiêu lần "hoá đơn chia số yêu cầu"?
   - **Trả lời:** Gấp **16,3 lần** [simulated] (4.472 đ [simulated] ÷ 274,7 đ). Lý do: hoá đơn chỉ có token + tool (329.585 đ, 7,5% tổng chi phí [simulated]) và chia cho cả 1.200 yêu cầu, còn chi phí thật cộng thêm giờ nhân viên xem lại, làm lại và chỉ chia cho 978 việc thành công.
@@ -33,12 +33,12 @@ Ghi chú khi so với 12.000 đ: 4.472 đ [simulated] chưa tính 222 ca nhân v
 
 ## A3 · Tách theo loại yêu cầu
 
-| Loại | Số yêu cầu | Tỉ lệ thành công | Số lần chạy mỗi yêu cầu | Chi phí mỗi việc thành công [simulated] | So với 12.000 đ [simulated] |
+| Loại | Số yêu cầu | Tỉ lệ thành công | Số lần chạy mỗi yêu cầu | Chi phí mỗi việc thành công (đ, simulated) | So với 12.000 đ (simulated) |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| noi_dia | 824 | 95,0% | 1,11 | 2.696 đ | 0,22× |
-| hang_nang | 158 | 74,1% | 1,47 | 8.221 đ | 0,69× |
-| quoc_te | 150 | 27,3% | 2,32 | 22.515 đ | 1,88× |
-| doi_tac | 68 | 54,4% | 1,88 | 10.215 đ | 0,85× |
+| noi_dia | 824 | 95,02% | 1,11 | 2.695,64 | 0,22× |
+| hang_nang | 158 | 74,05% | 1,47 | 8.220,73 | 0,69× |
+| quoc_te | 150 | 27,33% | 2,32 | 22.515,17 | 1,88× |
+| doi_tac | 68 | 54,41% | 1,88 | 10.214,87 | 0,85× |
 
 Tỉ lệ lần chạy `ok` theo lần thử (đo từ trace):
 
@@ -57,16 +57,18 @@ Ghi chú phạm vi pilot: doi_tac cũng loại vì sát ngưỡng (0,85× [simul
 
 ## A4 · Chi phí cố định (phạm vi noi_dia + hang_nang)
 
-| Khối lượng | Việc thành công mỗi tháng | Chi phí cố định mỗi việc | Chi phí mỗi việc thành công + cố định | So với 12.000 đ |
+| Khối lượng | Việc thành công mỗi tháng | Chi phí cố định mỗi việc (đ) | Chi phí mỗi việc thành công + cố định (đ, simulated) | So với 12.000 đ (simulated) |
 | --- | ---: | ---: | ---: | ---: |
-| 45.000 yêu cầu/tháng | 33.750 | 1.185 đ | 4.599 đ [simulated] | 0,38× [simulated] |
-| Một nửa khối lượng | 16.875 | 2.370 đ | 5.784 đ [simulated] | 0,48× [simulated] |
+| 45.000 yêu cầu/tháng | 33.750 | 1.185,19 | 4.599,09 | 0,38× |
+| Một nửa khối lượng: 22.500 yêu cầu/tháng | 16.875 | 2.370,37 | 5.784,27 | 0,48× |
 
 Cách tính: phạm vi có 982 yêu cầu, tổng 3.072.513 đ, 900 việc thành công → cps 3.414 đ [simulated]. Việc thành công mỗi tháng = 45.000 × 900 ÷ 1.200; cố định mỗi việc = 40.000.000 ÷ số việc thành công mỗi tháng.
 
 - Chi phí cố định có đổi kết luận không? Ở khối lượng nào?
   - **Trả lời (có đổi kết luận không):** **Không đổi kết luận** trong phạm vi noi_dia + hang_nang: sau khi cộng cố định vẫn rẻ hơn nhân viên tự làm, 0,38× ở quy mô đầy đủ và 0,48× khi khối lượng còn một nửa [simulated].
   - **Trả lời (ở khối lượng nào):** Ở **45.000 yêu cầu/tháng** cố định chỉ thêm 1.185 đ/việc (3.414 → 4.599 đ) [simulated]; khối lượng càng nhỏ thì cố định càng nặng: còn một nửa (giai đoạn pilot) là 2.370 đ/việc (5.784 đ). Hồ sơ phải ghi rõ số đã cộng cố định chưa và ở khối lượng nào.
+
+Đối chiếu độc lập bằng phép cộng CSV với `Decimal`: cả 9 kết quả khớp `mo_hinh()`. Ví dụ tiền tool: 5.600 × 15 = 84.000 đ.
 
 ## B1 · Đổi từng yếu tố
 
