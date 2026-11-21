@@ -50,3 +50,18 @@ Sao chép mục dưới đây cho từng thành viên.
 ### Bằng chứng
 
 -
+
+## Ngô Văn Tuân — 2A202603630
+
+### Phần việc phụ trách
+
+- Người kiểm số: CP1 (A1–A4), CP2 (B1–B4).
+
+### Đóng góp cụ thể
+
+- Đối chiếu các bảng chi phí bằng phép tính độc lập từ CSV với hỗ trợ Codex; bổ sung bằng chứng kiểm số, nhãn simulated và giải thích giả định làm tròn.
+
+### Bằng chứng
+
+- CP1: commit `1e709a7` (`CP1`).
+- CP2: bảng B1–B4 trong `report/team/bang_chi_phi.md`; công thức đối chiếu trong `report/team/2A202603630_NgoVanTuan.md`.

@@ -162,20 +162,20 @@ if __name__ == '__main__':
     print(f"{'Gốc (A2)':28s} {goc:8,.0f}")
     for ten, kw in kich_ban.items():
         cps = mo_hinh(runs, reqs, **kw)['cps']
-        print(f'{ten:28s} {cps:8,.0f} {(cps / goc - 1) * 100:+6.1f}%')
+        print(f'{ten:28s} {cps:10,.2f} {(cps / goc - 1) * 100:+7.2f}%')
 
     # ----- B2 · Đổi một cặp -----
     cap = mo_hinh(runs, reqs, gia_vao=52, gia_ra=260, he_so_xem_lai=2)['cps']
-    print(f'\n== B2 · Token gấp đôi + xem lại gấp đôi: {cap:,.0f} đ ({(cap / goc - 1) * 100:+.1f}%) [simulated]')
+    print(f'\n== B2 · Token gấp đôi + xem lại gấp đôi: {cap:,.2f} đ ({(cap / goc - 1) * 100:+.2f}%) [simulated]')
 
     # ----- B3 · Giới hạn chạy lại và chi phí cả hệ thống -----
-    print('\n== B3 · Giới hạn số lần chạy (chi phí cả hệ thống = trợ lý + 12.000 đ × ca không thành công) ==')
+    print('\n== B3 · Giới hạn số lần chạy (chi phí cả hệ thống = trợ lý + 12.000 đ × ca không thành công) [simulated] ==')
     print(f"{'gioi_han':9s} {'tong_tro_ly':>12s} {'khong_tc':>9s} {'ca_he_thong':>12s} {'cps':>7s}")
     for gioi_han in [1, 2, 3]:
         kq = mo_hinh(runs, reqs, max_lan_chay=gioi_han)
         khong_tc = len(reqs) - kq['thanh_cong']
-        print(f"{gioi_han:<9d} {kq['tong']:12,.0f} {khong_tc:9d} "
-              f"{kq['tong'] + khong_tc * BASELINE:12,.0f} {kq['cps']:7,.0f}")
+        print(f"{gioi_han:<9d} {kq['tong']:12,.2f} {khong_tc:9d} "
+              f"{kq['tong'] + khong_tc * BASELINE:12,.2f} {kq['cps']:9,.2f}")
 
     # ----- B4 · Nếu phải xem lại 100% (noi_dia + hang_nang) -----
     print('\n== B4 · Xem lại 100%, phạm vi noi_dia + hang_nang [simulated] ==')
@@ -189,15 +189,15 @@ if __name__ == '__main__':
     phut_lam_tb = reqs.loc[reqs['ket_qua'] == 'lam_lai', 'phut_lam_lai_simulated']
     print(f'{co_ok} yêu cầu có ≥ 1 lần ok × {PHUT_XEM} phút; {so_lam_lai} ca lam_lai; '
           f'token + tool {token_tool:,.0f} đ; {tc_pv} việc thành công')
-    print(f'Phút làm lại trong dữ liệu: trung bình {phut_lam_tb.mean():.1f}, trung vị {phut_lam_tb.median():.1f}')
-    for nhan_lam, phut_lam in [('đề cho 9 phút', PHUT_LAM_DE), ('dữ liệu', round(phut_lam_tb.mean(), 1))]:
+    print(f'Phút làm lại trong dữ liệu: trung bình {phut_lam_tb.mean():.4f}, trung vị {phut_lam_tb.median():.1f} {SIM}')
+    for nhan_lam, phut_lam in [('đề cho 9 phút', PHUT_LAM_DE), ('dữ liệu, làm tròn 1 chữ số', round(phut_lam_tb.mean(), 1))]:
         tien_xem = co_ok * PHUT_XEM * LUONG_PHUT
         tien_lam = so_lam_lai * phut_lam * LUONG_PHUT
         tong_b4 = tien_xem + tien_lam + token_tool
         hoa_von = (BASELINE * tc_pv - tien_lam - token_tool) / (co_ok * LUONG_PHUT)
-        print(f'Làm lại {phut_lam} phút ({nhan_lam}): xem lại {tien_xem:,.0f} + làm lại {tien_lam:,.0f} '
-              f'→ tổng {tong_b4:,.0f} đ → {tong_b4 / tc_pv:,.0f} đ/việc = {tong_b4 / tc_pv / BASELINE:.2f}× · '
-              f'hoà vốn khi xem lại ≤ {hoa_von:.1f} phút')
+        print(f'Làm lại {phut_lam} phút ({nhan_lam}): xem lại {tien_xem:,.2f} + làm lại {tien_lam:,.2f} '
+              f'→ tổng {tong_b4:,.2f} đ → {tong_b4 / tc_pv:,.2f} đ/việc = {tong_b4 / tc_pv / BASELINE:.2f}× · '
+              f'hoà vốn khi xem lại ≤ {hoa_von:.2f} phút {SIM}')
     # TODO CP4 · Nhiệm vụ D: cỡ mẫu.
     #   from statsmodels.stats.proportion import proportion_effectsize
     #   from statsmodels.stats.power import NormalIndPower
