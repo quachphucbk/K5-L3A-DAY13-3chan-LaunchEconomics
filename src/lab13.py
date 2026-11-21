@@ -246,3 +246,16 @@ if __name__ == '__main__':
                       ('Nội địa + hàng nặng', reqs[reqs['loai'].isin(['noi_dia', 'hang_nang'])])]:
         mo_lai = nhom['mo_lai_trong_7_ngay'].eq(1).sum()
         print(f'{ten} · mở lại trong 7 ngày: {mo_lai}/{len(nhom):,} = {mo_lai / len(nhom):.2%}.')
+
+    # ----- CP5 · E1 · Tính thử ba chỉ số trên 1.200 yêu cầu (đợt chạy thử, chưa có đối chứng) -----
+    print('\n== E1 · Ba chỉ số trong đợt chạy thử ==')
+    chinh = (reqs['dong_trong_24h'] == 1) & (reqs['mo_lai_trong_7_ngay'] == 0)
+    duoc_xem = reqs[reqs['duoc_xem_lai'] == 1]
+    bo_qua = duoc_xem['quyet_dinh_xem_lai'].isin(['sua', 'bo'])
+    an_toan = reqs['mo_lai_trong_7_ngay'] == 1
+    print(f'Chính · đóng trong 24h, không mở lại 7 ngày: {chinh.sum()}/{len(reqs):,} = {chinh.mean():.2%}')
+    print(f'Dùng  · bỏ qua gợi ý (sua + bo) / được xem lại: {bo_qua.sum()}/{len(duoc_xem)} = {bo_qua.mean():.2%}')
+    print(f'An toàn · mở lại trong 7 ngày: {an_toan.sum()}/{len(reqs):,} = {an_toan.mean():.2%}')
+    pv_e = reqs[reqs['loai'].isin(['noi_dia', 'hang_nang'])]
+    print(f"Trong phạm vi noi_dia + hang_nang: tỉ lệ lam_lai {(pv_e['ket_qua'] == 'lam_lai').mean():.1%}, "
+          f"tỉ lệ được xem lại {pv_e['duoc_xem_lai'].mean():.1%}")
