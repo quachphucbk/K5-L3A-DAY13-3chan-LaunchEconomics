@@ -7,7 +7,7 @@
 - Repo nhóm: `K5-L3A-DAY13-3chan-LaunchEconomics` (xem [SUBMISSION.md](SUBMISSION.md))
 - URL repo: https://github.com/quachphucbk/K5-L3A-DAY13-3chan-LaunchEconomics
 - Nhánh nộp: `main`
-- Commit chốt: (điền mã commit cuối cùng trước deadline)
+- Commit chốt: 0090982
 
 ## Thành viên
 
