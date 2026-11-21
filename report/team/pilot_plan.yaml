@@ -1,12 +1,27 @@
 # Lab 13 · CP4 · Kế hoạch pilot LogiX-VN · Nhóm 3chan
-# D1a. Chia theo yêu cầu, MDE 5 điểm phần trăm: 1.251 yêu cầu mỗi nhánh.
-# D1b. 75 yêu cầu mỗi nhân viên: DE 2,48; 3.103 yêu cầu và 42 nhân viên mỗi nhánh.
-# D1c. 20 nhân viên mỗi nhánh: giới hạn trên hiệu dụng 1.000.
-# D1d. 6 depot mỗi nhánh: giới hạn trên hiệu dụng 300.
-# D1e. MDE 6 điểm phần trăm: 859 yêu cầu hiệu dụng, 299 yêu cầu mỗi nhân viên,
-#      5.980 yêu cầu thực mỗi nhánh và DE 6,96.
-# Đánh đổi: Nếu tác động thật là 5 điểm phần trăm, power khoảng 64,18%.
-# Nguồn: src/lab13.py và report/team/CP4_D1_2A202603633.txt.
+# Nguồn số: src/lab13.py (chạy trong src/: python lab13.py)
+# Kiểm tra đọc được: python -c "import yaml; yaml.safe_load(open('../report/team/pilot_plan.yaml'))"
+#
+# D1 · Cỡ mẫu (baseline 0,70; mục tiêu +5 điểm; alpha 0,05; power 0,8; ICC 0,02)
+#   a) Chia theo yêu cầu: 1.251 yêu cầu mỗi nhóm.
+#   b) Theo nhân viên, m = 75: DE = 1 + 74 × 0,02 = 2,48; 1.251 × 2,48 = 3.103 yêu cầu = 42 nhân viên mỗi nhóm; tổng 84 > 40 nhân viên: không đủ người.
+#   c) 20 nhân viên mỗi nhóm: cỡ mẫu hiệu dụng tối đa 20 / 0,02 = 1.000 < 1.251: không đạt mức 5 điểm.
+#   d) 6 depot mỗi nhóm: cỡ mẫu hiệu dụng tối đa 6 / 0,02 = 300, chỉ 6 cụm < 20: loại.
+#   e) Mức chênh 6 điểm (859 mỗi nhóm), 20 nhân viên mỗi nhóm: m ≥ 299 yêu cầu mỗi nhân viên (DE 6,96), tức 5.980 yêu cầu thực mỗi nhóm.
+#
+# D2 · Năm câu kiểm tra "tách được tác động" với cách chia đã chọn (theo nhân viên, 20 + 20):
+#   1. Đối chứng chạy cùng thời gian: Có, 20 nhân viên đối chứng xử lý cùng loại yêu cầu trong cùng thời gian, cân bằng theo depot.
+#   2. Chia ngẫu nhiên hay do người chọn: Ngẫu nhiên, bốc thăm bằng code với seed 13 ghi trước, phân tầng theo depot.
+#   3. Ảnh hưởng gián tiếp và cách giảm: Có rủi ro nhân viên chia sẻ gợi ý trong cùng depot; giảm bằng quyền truy cập theo tài khoản và log lượt mở trợ lý theo staff_id.
+#   4. Chỉ số chính, ngưỡng, ngày quyết định đã viết trước: Có, chỉ số chính, MDE 0,06, cỡ mẫu, luật dừng và ngày quyết định chốt trước ngày bắt đầu.
+#   5. Ít nhất 20 cụm mỗi nhóm: Có, đúng 20 nhân viên mỗi nhóm.
+#
+# Đánh đổi đã chấp nhận: 20 cụm chỉ đủ thấy mức chênh 6 điểm, không đủ cho 5 điểm (tối đa 1.000 < 1.251);
+#   nếu tác động thật là 5 điểm thì power chỉ còn khoảng 0,64 (64,18%).
+#
+# Tỉ lệ mo_lai_trong_7_ngay hiện tại và ngưỡng an toàn đã chọn: 4,25% (51/1.200) toàn mẫu, 3,97% (39/982)
+#   trong phạm vi noi_dia + hang_nang. Ngưỡng tuyệt đối 3% sẽ dừng pilot ngay tuần đầu, nên chọn: nhóm trợ lý
+#   cao hơn đối chứng ≥ 2 điểm hoặc vượt trần tuyệt đối 6%.
 #
 # D2 · Năm câu kiểm tra tách được tác động, theo phương án đã ghi trong kế hoạch:
 # D2.1. Đối chứng cùng thời gian: Có theo thiết kế; hai nhánh xử lý cùng loại yêu cầu tại các depot có cả hai nhánh, trong cùng giai đoạn đo chính từ tuần 3.
@@ -17,7 +32,7 @@
 
 pilot:
   owner: "Giám đốc vận hành LogiX-VN"
-  scope: "Yêu cầu nội địa và hàng nặng tại các depot có nhân viên ở cả hai nhánh. Giới hạn trợ lý tối đa 2 lượt chạy."
+  scope: "Yêu cầu noi_dia (0,22× so với 12.000 đ, simulated) và hang_nang (0,69×, simulated) tại các depot có nhân viên ở cả hai nhánh; loại quoc_te (1,88×, simulated; thành công 27,3%) và doi_tac (0,85×, simulated; điều khoản riêng). Giới hạn trợ lý tối đa 2 lượt chạy vì B3 cho chi phí cả hệ thống thấp nhất (6.901.220 đ, simulated)."
   assignment:
     unit: staff
     control_share: 0.5
@@ -41,9 +56,9 @@ pilot:
     spillover_risk: "Nhân viên có thể chia sẻ gợi ý. Cấp quyền theo tài khoản, không chia sẻ gợi ý giữa nhánh và kiểm tra log sử dụng."
     predeclared: "Chốt chỉ số, MDE, cỡ mẫu, luật dừng và lịch trước khi bắt đầu. Phân tích theo nhánh được gán, có xét cụm nhân viên và phân tầng depot."
   stop_rules:
-    - "NẾU phát hiện ít nhất 1 ca hoàn trùng, hoặc tỷ lệ mở lại 7 ngày vượt 6% hay cao hơn đối chứng từ 2 điểm phần trăm TRONG 3 ngày kiểm tra liên tiếp đối với ngưỡng mở lại THÌ Giám đốc vận hành tắt trợ lý trong 30 phút kể từ khi xác nhận KHÔNG THÌ giữ bước hiện tại cho đến lần rà soát tiếp theo."
-    - "NẾU chi phí trợ lý trên mỗi việc thành công vượt 8.000 đ TRONG 2 tuần liên tiếp THÌ PM thu hẹp về nội địa và yêu cầu rà lại kế hoạch trước khi tiếp tục thu dữ liệu chính KHÔNG THÌ giữ phạm vi đã chốt."
-    - "NẾU tỷ lệ sửa hoặc bỏ gợi ý vượt 40% số ca được xem lại TRONG 1 tuần THÌ Trưởng nhóm CSKH phỏng vấn 5 nhân viên trong 3 ngày và tạm dừng tăng tỷ lệ triển khai KHÔNG THÌ giữ lịch triển khai nếu các điều kiện khác đạt."
+    - "NẾU phát hiện ít nhất 1 ca hoàn trùng, hoặc tỷ lệ mở lại 7 ngày vượt 6% hay cao hơn đối chứng từ 2 điểm phần trăm TRONG 3 ngày kiểm tra liên tiếp đối với ngưỡng mở lại THÌ Giám đốc vận hành tắt trợ lý trong 30 phút kể từ khi xác nhận KHÔNG THÌ không được chuyển sang bước rollout tiếp theo."
+    - "NẾU chi phí trợ lý trên mỗi việc thành công vượt 8.000 đ TRONG 2 tuần liên tiếp THÌ PM thu hẹp về nội địa và yêu cầu rà lại kế hoạch trước khi tiếp tục thu dữ liệu chính KHÔNG THÌ không được giữ hàng nặng trong phạm vi hay tiếp tục thu dữ liệu chính."
+    - "NẾU tỷ lệ sửa hoặc bỏ gợi ý vượt 40% số ca được xem lại TRONG 1 tuần THÌ Trưởng nhóm CSKH phỏng vấn 5 nhân viên trong 3 ngày và tạm dừng tăng tỷ lệ triển khai KHÔNG THÌ không được tăng tỷ lệ triển khai sang bước tiếp theo."
   interim_looks: "Theo dõi an toàn, chi phí và mức sử dụng để áp dụng luật dừng. Đánh giá chỉ số chính sau khi đủ mẫu ở cả hai nhánh và đủ 7 ngày theo dõi cho ca cuối."
   rollback: "Giám đốc vận hành tắt quyền dùng trợ lý và chuyển ca đang chờ về hàng đợi thủ công. Nhân viên kiểm tra trạng thái giao dịch trước khi xử lý tiếp."
   decision_date: "2027-01-05"
