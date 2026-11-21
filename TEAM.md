@@ -11,7 +11,7 @@
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
-|   1 |        |      |       |        |         |
+|   1 | Quách Ngọc Phúc       | 2A202603665     | quachphucbk@gmail.com      | https://github.com/quachphucbk       | Người viết code        |
 |   2 |        |      |       |        |         |
 |   3 | Nguyễn Đức Minh       | 2A202603633     | Jiji.Minh@gmail.com      | https://github.com/MinhDucDepZaiJ       | Người gắn nhãn 1        |
 |   4 |        |      |       |        |         |
