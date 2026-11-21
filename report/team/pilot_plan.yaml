@@ -1,59 +1,47 @@
-# Lab 13 · Nhiệm vụ D · Kế hoạch pilot trợ lý hoàn phí LogiX-VN (Gate 2a)
-# Điền mọi chỗ có dấu hỏi. Khi nộp, ngoài các dòng chú thích không còn dấu hỏi nào.
-# Kiểm tra đọc được: python -c "import yaml; yaml.safe_load(open('../report/team/pilot_plan.yaml'))"
-# Trạng thái: D1 đã tính; D2-D3 chờ nhóm thống nhất. Chưa phải kế hoạch pilot hoàn chỉnh.
-#
-# D1 · Cỡ mẫu (baseline 0,70; mục tiêu +5 điểm; alpha 0,05; power 0,8; ICC 0,02)
-#   a) Chia theo yêu cầu: 1.251 yêu cầu/nhóm (0,70 -> 0,75, kiểm định hai phía).
-#   b) Theo nhân viên, m = 75: DE = 1 + 74*0,02 = 2,48;
-#      ceil(1.251*2,48) = 3.103 yêu cầu/nhóm; ceil(3.103/75) = 42 người/nhóm.
-#      Cần tổng 84 người > 40: không đủ người.
-#   c) 20 nhân viên mỗi nhóm: n hiệu dụng < 20/0,02 = 1.000, không đạt 1.251.
-#      1.000 là trần tiệm cận khi số yêu cầu/người tăng, không phải cỡ mẫu đạt được.
-#   d) 6 depot mỗi nhóm: n hiệu dụng < 6/0,02 = 300; chỉ 6 cụm, dưới 20 cụm/nhóm.
-#   e) Mức chênh 6 điểm: cần 859 hiệu dụng/nhóm; 20 nhân viên/nhóm cần m >= 299.
-#      DE = 1 + 298*0,02 = 6,96; 20*299/6,96 = 859,20 hiệu dụng/nhóm.
-#      Số yêu cầu thực tế: 5.980/nhóm, tổng 11.960. Đây là phương án để nhóm cân nhắc.
-#
-# D2 · Năm câu kiểm tra "tách được tác động" với cách chia đã chọn (mỗi câu một dòng):
-#   1. Đối chứng chạy cùng thời gian:
-#   2. Chia ngẫu nhiên hay do người chọn:
-#   3. Ảnh hưởng gián tiếp và cách giảm:
-#   4. Chỉ số chính, ngưỡng, ngày quyết định đã viết trước:
-#   5. Ít nhất 20 cụm mỗi nhóm:
-#
-# Đánh đổi đã chấp nhận (nếu cách chia chưa đạt cả hai điều kiện):
-#
-# Tỉ lệ mo_lai_trong_7_ngay hiện tại và ngưỡng an toàn đã chọn:
-#   Toàn mẫu: 51/1.200 = 4,25%; noi_dia + hang_nang: 39/982 = 3,97%.
-#   Chưa chọn ngưỡng an toàn; cần nhóm chốt sau khi đối chiếu baseline này.
+# Lab 13 · CP4 · Kế hoạch pilot LogiX-VN · Nhóm 3chan
+# D1a. Chia theo yêu cầu, MDE 5 điểm phần trăm: 1.251 yêu cầu mỗi nhánh.
+# D1b. 75 yêu cầu mỗi nhân viên: DE 2,48; 3.103 yêu cầu và 42 nhân viên mỗi nhánh.
+# D1c. 20 nhân viên mỗi nhánh: giới hạn trên hiệu dụng 1.000.
+# D1d. 6 depot mỗi nhánh: giới hạn trên hiệu dụng 300.
+# D1e. MDE 6 điểm phần trăm: 859 yêu cầu hiệu dụng, 299 yêu cầu mỗi nhân viên,
+#      5.980 yêu cầu thực mỗi nhánh và DE 6,96.
+# Đánh đổi: Nếu tác động thật là 5 điểm phần trăm, power khoảng 64,18%.
+# Nguồn: src/lab13.py và report/team/CP4_D1_2A202603633.txt.
 
 pilot:
-  owner: "?"                      # một người có tên vai trò, không ghi "cả đội"
-  scope: "?"                      # loại yêu cầu nào, depot nào; dựa vào kết quả A3
+  owner: "Giám đốc vận hành LogiX-VN"
+  scope: "Yêu cầu nội địa và hàng nặng tại các depot có nhân viên ở cả hai nhánh. Giới hạn trợ lý tối đa 2 lượt chạy."
   assignment:
-    unit: "?"                     # request | staff | depot
+    unit: staff
     control_share: 0.5
     randomized: true
-  rollout: [0.10, 0.25, 0.50]     # mỗi bước một tuần
+    method: "Chia 40 nhân viên thành hai nhánh 20 người, cân bằng theo depot với seed 13. Giữ nguyên phân nhóm suốt pilot."
+  rollout: [0.10, 0.25, 0.50]
+  rollout_notes: "Hai tuần đầu mở quyền lần lượt cho 4 và 10 trong số 20 nhân viên nhánh thử nghiệm. Từ tuần 3 mở cho cả 20 nếu không có luật dừng kích hoạt. Chỉ lấy yêu cầu mới từ giai đoạn 20/20 để phân tích chính."
   primary_metric:
     name: dong_trong_24h_khong_mo_lai_7_ngay
     baseline: 0.70
-    mde: 0.05
+    mde: 0.06
     alpha: 0.05
     power: 0.80
-    n_per_arm: "?"
-    design_effect: "?"            # 1 nếu chia theo yêu cầu
-    clusters_per_arm: "?"         # để trống nếu chia theo yêu cầu
+    n_per_arm: 859
+    observed_requests_per_arm: 5980
+    requests_per_cluster: 299
+    design_effect: 6.96
+    clusters_per_arm: 20
   identifiability:
-    concurrent_control: "?"
-    spillover_risk: "?"
-    predeclared: "?"
+    concurrent_control: "Hai nhánh xử lý cùng loại yêu cầu trong cùng thời gian. Nhánh đối chứng dùng quy trình thủ công."
+    spillover_risk: "Nhân viên có thể chia sẻ gợi ý. Cấp quyền theo tài khoản, không chia sẻ gợi ý giữa nhánh và kiểm tra log sử dụng."
+    predeclared: "Chốt chỉ số, MDE, cỡ mẫu, luật dừng và lịch trước khi bắt đầu. Phân tích theo nhánh được gán, có xét cụm nhân viên và phân tầng depot."
   stop_rules:
-    - "NẾU ? TRONG ? THÌ ? KHÔNG THÌ ?"
-    - "NẾU ? TRONG ? THÌ ? KHÔNG THÌ ?"
-    - "NẾU ? TRONG ? THÌ ? KHÔNG THÌ ?"
-  interim_looks: "chỉ kiểm tra chỉ số an toàn"
-  rollback: "?"                   # ai bấm, mất bao lâu, khách được phục vụ bằng gì
-  decision_date: "?"
-  simulated_inputs: ["?"]         # liệt kê mọi con số giả lập đã dùng
+    - "NẾU phát hiện ít nhất 1 ca hoàn trùng, hoặc tỷ lệ mở lại 7 ngày vượt 6% hay cao hơn đối chứng từ 2 điểm phần trăm TRONG 3 ngày kiểm tra liên tiếp đối với ngưỡng mở lại THÌ Giám đốc vận hành tắt trợ lý trong 30 phút kể từ khi xác nhận KHÔNG THÌ giữ bước hiện tại cho đến lần rà soát tiếp theo."
+    - "NẾU chi phí trợ lý trên mỗi việc thành công vượt 8.000 đ TRONG 2 tuần liên tiếp THÌ PM thu hẹp về nội địa và yêu cầu rà lại kế hoạch trước khi tiếp tục thu dữ liệu chính KHÔNG THÌ giữ phạm vi đã chốt."
+    - "NẾU tỷ lệ sửa hoặc bỏ gợi ý vượt 40% số ca được xem lại TRONG 1 tuần THÌ Trưởng nhóm CSKH phỏng vấn 5 nhân viên trong 3 ngày và tạm dừng tăng tỷ lệ triển khai KHÔNG THÌ giữ lịch triển khai nếu các điều kiện khác đạt."
+  interim_looks: "Theo dõi an toàn, chi phí và mức sử dụng để áp dụng luật dừng. Đánh giá chỉ số chính sau khi đủ mẫu ở cả hai nhánh và đủ 7 ngày theo dõi cho ca cuối."
+  rollback: "Giám đốc vận hành tắt quyền dùng trợ lý và chuyển ca đang chờ về hàng đợi thủ công. Nhân viên kiểm tra trạng thái giao dịch trước khi xử lý tiếp."
+  decision_date: "2027-01-05"
+  decision_date_note: "Mốc dự kiến theo bài mẫu. Nếu thiếu mẫu hoặc chưa đủ thời gian theo dõi, hoãn quyết định."
+  simulated_inputs:
+    - "Trace lab: mở lại trong 7 ngày 51/1.200 (4,25%) toàn mẫu và 39/982 (3,97%) trong phạm vi pilot."
+    - "Giả định D1: baseline 70%, ICC 0,02, MDE 6 điểm phần trăm và DE 6,96."
+    - "Chi phí xem lại và làm lại trong A2–B4 lấy từ số phút mô phỏng. Pilot đo thời gian thực để áp dụng luật dừng chi phí."
