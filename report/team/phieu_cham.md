@@ -4,7 +4,7 @@ Nhóm số n chấm nhóm số n + 1; nhóm cuối chấm nhóm 1. Chấm theo b
 
 - Nhóm chấm (hội đồng): 3chan
 - Nhóm được chấm: ABC
--  https://github.com/nhvtmanh/K5-L3A-DAY13-NhomABC-LaunchEconomics.git
+- link repo :https://github.com/nhvtmanh/K5-L3A-DAY13-NhomABC-LaunchEconomics.git
 
 
 | Tiêu chí | 0 điểm | 5 điểm | 10 điểm | Điểm | Lý do (có số) |
