@@ -20,14 +20,14 @@ Người gắn nhãn 1: ... · Người gắn nhãn 2: ... (gắn trong 8 phút,
 | 10 | Ngữ cảnh | Ngữ cảnh | 1 | Ngữ cảnh |
 | 11 | Giới hạn hệ thống | Giới hạn hệ thống | 1 | Giới hạn hệ thống |
 | 12 | Ngầm | Ngầm | 1 | Ngầm |
-| 13 | Ngữ cảnh | Giới hạn hệ thống | 1 | Giới hạn hệ thống |
+| 13 | Ngữ cảnh | Giới hạn hệ thống | 0 | Giới hạn hệ thống |
 | 14 | Do người dùng | Do người dùng | 1 | Do người dùng |
 | 15 | Hệ thống | Hệ thống | 1 | Hệ thống |
 | 16 | Ngữ cảnh | Ngữ cảnh | 1 | Ngữ cảnh |
 | 17 | Ngầm | Ngầm | 1 | Ngầm |
 | 18 | Ngữ cảnh | Ngữ cảnh | 1 | Ngữ cảnh |
 | 19 | Giới hạn hệ thống | Giới hạn hệ thống | 1 | Giới hạn hệ thống |
-| 20 | Ngầm | Hệ thống | 1 | Hệ thống |
+| 20 | Ngầm | Hệ thống | 0 | Hệ thống |
 
 **Tỉ lệ đồng thuận:** 100% (20/20 ca).
 
