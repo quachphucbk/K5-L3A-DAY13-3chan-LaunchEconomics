@@ -43,8 +43,8 @@ Cách phát hiện phải đo được (event, ngưỡng, tần suất). Ngườ
 
 | Ca | Loại lỗi | Phát hiện bằng gì | Khắc phục thế nào | Ai phụ trách |
 | --: | --- | --- | --- | --- |
-| ... | Do người dùng | ... | ... | ... |
-| ... | Hệ thống | ... | ... | ... |
+| 1 | Do người dùng | người dùng thao tác sai | yêu cầu người dùng xác nhận lại | người gán nhãn 2 |
+| 2 | Hệ thống | llm gọi sai tool cho ra kết quả sai | thêm ngữ cảnh cho llm  | người gán nhãn 2 |
 | ... | Ngữ cảnh | ... | ... | ... |
 | ... | Giới hạn hệ thống | ... | ... | ... |
 | ... | Ngầm | ... | ... | ... |
