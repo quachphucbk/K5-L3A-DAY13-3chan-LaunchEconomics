@@ -1,13 +1,19 @@
 # Lab 13 · Nhiệm vụ D · Kế hoạch pilot trợ lý hoàn phí LogiX-VN (Gate 2a)
 # Điền mọi chỗ có dấu hỏi. Khi nộp, ngoài các dòng chú thích không còn dấu hỏi nào.
 # Kiểm tra đọc được: python -c "import yaml; yaml.safe_load(open('../report/team/pilot_plan.yaml'))"
+# Trạng thái: D1 đã tính; D2-D3 chờ nhóm thống nhất. Chưa phải kế hoạch pilot hoàn chỉnh.
 #
 # D1 · Cỡ mẫu (baseline 0,70; mục tiêu +5 điểm; alpha 0,05; power 0,8; ICC 0,02)
-#   a) Chia theo yêu cầu:
-#   b) Theo nhân viên, m = 75:
-#   c) 20 nhân viên mỗi nhóm:
-#   d) 6 depot mỗi nhóm:
-#   e) Mức chênh 6 điểm (859 mỗi nhóm), 20 nhân viên mỗi nhóm:
+#   a) Chia theo yêu cầu: 1.251 yêu cầu/nhóm (0,70 -> 0,75, kiểm định hai phía).
+#   b) Theo nhân viên, m = 75: DE = 1 + 74*0,02 = 2,48;
+#      ceil(1.251*2,48) = 3.103 yêu cầu/nhóm; ceil(3.103/75) = 42 người/nhóm.
+#      Cần tổng 84 người > 40: không đủ người.
+#   c) 20 nhân viên mỗi nhóm: n hiệu dụng < 20/0,02 = 1.000, không đạt 1.251.
+#      1.000 là trần tiệm cận khi số yêu cầu/người tăng, không phải cỡ mẫu đạt được.
+#   d) 6 depot mỗi nhóm: n hiệu dụng < 6/0,02 = 300; chỉ 6 cụm, dưới 20 cụm/nhóm.
+#   e) Mức chênh 6 điểm: cần 859 hiệu dụng/nhóm; 20 nhân viên/nhóm cần m >= 299.
+#      DE = 1 + 298*0,02 = 6,96; 20*299/6,96 = 859,20 hiệu dụng/nhóm.
+#      Số yêu cầu thực tế: 5.980/nhóm, tổng 11.960. Đây là phương án để nhóm cân nhắc.
 #
 # D2 · Năm câu kiểm tra "tách được tác động" với cách chia đã chọn (mỗi câu một dòng):
 #   1. Đối chứng chạy cùng thời gian:
@@ -19,6 +25,8 @@
 # Đánh đổi đã chấp nhận (nếu cách chia chưa đạt cả hai điều kiện):
 #
 # Tỉ lệ mo_lai_trong_7_ngay hiện tại và ngưỡng an toàn đã chọn:
+#   Toàn mẫu: 51/1.200 = 4,25%; noi_dia + hang_nang: 39/982 = 3,97%.
+#   Chưa chọn ngưỡng an toàn; cần nhóm chốt sau khi đối chiếu baseline này.
 
 pilot:
   owner: "?"                      # một người có tên vai trò, không ghi "cả đội"

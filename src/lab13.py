@@ -4,6 +4,7 @@ Không cần khoá API. Điền các chỗ ghi VIẾT Ở ĐÂY (đánh dấu TO
 Bản gốc chưa sửa nằm ở lab13_starter.py.
 """
 import math
+from statistics import NormalDist
 import pandas as pd
 
 # Bảng giá GIẢ ĐỊNH của lab (không phải giá thật của nhà cung cấp nào)
@@ -86,6 +87,16 @@ def mo_hinh(runs, reqs, gia_vao=26, gia_ra=130, gia_tool=15, luong_phut=2000,
         cps=tong / thanh_cong,
         hoa_don_moi_yc=(tien_token.sum() + tien_tool.sum()) / len(reqs),
     )
+
+
+def co_mau_hai_ti_le(p1, p2, alpha=0.05, power=0.8):
+    """Cỡ mẫu mỗi nhóm cho hai tỉ lệ độc lập; kiểm định hai phía."""
+    za = NormalDist().inv_cdf(1 - alpha / 2)
+    zb = NormalDist().inv_cdf(power)
+    p_trung_binh = (p1 + p2) / 2
+    tu_so = (za * math.sqrt(2 * p_trung_binh * (1 - p_trung_binh))
+             + zb * math.sqrt(p1 * (1 - p1) + p2 * (1 - p2))) ** 2
+    return math.ceil(tu_so / (p2 - p1) ** 2)
 
 
 if __name__ == '__main__':
@@ -198,6 +209,35 @@ if __name__ == '__main__':
         print(f'Làm lại {phut_lam} phút ({nhan_lam}): xem lại {tien_xem:,.2f} + làm lại {tien_lam:,.2f} '
               f'→ tổng {tong_b4:,.2f} đ → {tong_b4 / tc_pv:,.2f} đ/việc = {tong_b4 / tc_pv / BASELINE:.2f}× · '
               f'hoà vốn khi xem lại ≤ {hoa_von:.2f} phút {SIM}')
-    # TODO CP4 · Nhiệm vụ D: cỡ mẫu.
-    #   from statsmodels.stats.proportion import proportion_effectsize
-    #   from statsmodels.stats.power import NormalIndPower
+    # ----- D1 · Cỡ mẫu: kết quả tính, chưa chọn phương án pilot -----
+    print('\n== D1 · Cỡ mẫu (baseline 0.70, alpha 0.05, power 0.80, ICC 0.02) ==')
+    icc = 0.02
+    n_5_diem = co_mau_hai_ti_le(0.70, 0.75)
+    print(f'a) Chia theo yêu cầu: {n_5_diem:,} yêu cầu mỗi nhóm.')
+
+    m_75 = 75
+    de_75 = 1 + (m_75 - 1) * icc
+    n_theo_nhan_vien = math.ceil(n_5_diem * de_75)
+    so_nhan_vien_moi_nhom = math.ceil(n_theo_nhan_vien / m_75)
+    print(f'b) m=75: DE={de_75:.2f}; cần {n_theo_nhan_vien:,} yêu cầu/nhóm, '
+          f'{so_nhan_vien_moi_nhom} nhân viên/nhóm, tổng {2 * so_nhan_vien_moi_nhom} > 40: không đủ người.')
+
+    so_cum_nhan_vien = 20
+    print(f'c) 20 nhân viên/nhóm: n hiệu dụng < {so_cum_nhan_vien / icc:,.0f} '
+          f'(trần tiệm cận), dưới mức cần {n_5_diem:,}.')
+    print(f'd) 6 depot/nhóm: n hiệu dụng < {6 / icc:,.0f}; chỉ 6 cụm, dưới 20 cụm/nhóm.')
+
+    n_6_diem = co_mau_hai_ti_le(0.70, 0.76)
+    m_toi_thieu = math.ceil(n_6_diem * (1 - icc) / (so_cum_nhan_vien - n_6_diem * icc))
+    de_6_diem = 1 + (m_toi_thieu - 1) * icc
+    n_hieu_dung_6_diem = so_cum_nhan_vien * m_toi_thieu / de_6_diem
+    print(f'e) Chênh 6 điểm: cần {n_6_diem:,} hiệu dụng/nhóm; 20 nhân viên/nhóm '
+          f'cần ít nhất {m_toi_thieu} yêu cầu/người, DE={de_6_diem:.2f}, '
+          f'n hiệu dụng={n_hieu_dung_6_diem:.2f}; '
+          f'{so_cum_nhan_vien * m_toi_thieu:,} yêu cầu thực tế/nhóm.')
+
+    print('\n== D · Tỉ lệ mở lại hiện tại, dùng để đối chiếu ngưỡng an toàn ==')
+    for ten_tap, tap in [('Toàn mẫu', reqs), ('noi_dia + hang_nang', pham_vi)]:
+        so_mo_lai = int(tap['mo_lai_trong_7_ngay'].eq(1).sum())
+        print(f'{ten_tap}: {so_mo_lai}/{len(tap)} = {so_mo_lai / len(tap):.2%}.')
+    # TODO CP4 D2-D3: nhóm thống nhất phương án, đánh đổi, ngưỡng dừng và lịch pilot.

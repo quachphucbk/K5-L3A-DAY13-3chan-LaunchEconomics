@@ -55,7 +55,7 @@ Sao chép mục dưới đây cho từng thành viên.
 
 ### Phần việc phụ trách
 
-- Người kiểm số: CP1 (A1–A4), CP2 (B1–B4).
+- Người kiểm số: CP1 (A1–A4), CP2 (B1–B4), CP4 (D1 đã tính; D2–D3 chờ nhóm thống nhất).
 
 ### Đóng góp cụ thể
 
@@ -65,3 +65,4 @@ Sao chép mục dưới đây cho từng thành viên.
 
 - CP1: commit `1e709a7` (`CP1`).
 - CP2: bảng B1–B4 trong `report/team/bang_chi_phi.md`; công thức đối chiếu trong `report/team/2A202603630_NgoVanTuan.md`.
+- CP4 D1: `src/lab13.py` tính 5 câu cỡ mẫu; kết quả và tỉ lệ mở lại hiện tại nằm trong chú thích `report/team/pilot_plan.yaml`.
